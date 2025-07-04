@@ -3,6 +3,8 @@ import type {Project} from '../components/ProjectSection'
 import Header from '../components/Header';
 
 let imgRoute = './../src/assets/img/portfolio/';
+// let imgRoute = '/portfolio-site/src/assets/img/portfolio/';
+
 
 const projects: Project[] = [
   {
@@ -24,6 +26,7 @@ const projects: Project[] = [
     category: "App"
   },
   {
+
     id: 3,
     title: "MyDoctor App",
     url: "https://mydoctor.health",

@@ -11,6 +11,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/portfolio-details/:id" element={<ProjectPage />} />
+                    {/* Add a catch-all route for GitHub Pages */}
+          <Route path="*" element={<Home />} />
         </Routes>
     </BrowserRouter>
     </>
