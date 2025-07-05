@@ -158,7 +158,7 @@ const ContactSection: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div className="form-group">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                   <User className="w-4 h-4 inline mr-2" />
                   Name
                 </label>
@@ -185,7 +185,7 @@ const ContactSection: React.FC = () => {
 
               {/* Email Field */}
               <div className="form-group">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                   <Mail className="w-4 h-4 inline mr-2" />
                   Email
                 </label>
@@ -212,7 +212,7 @@ const ContactSection: React.FC = () => {
 
               {/* Subject Field */}
               <div className="form-group">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
                   <FileText className="w-4 h-4 inline mr-2" />
                   Subject
                 </label>
@@ -239,7 +239,7 @@ const ContactSection: React.FC = () => {
 
               {/* Message Field */}
               <div className="form-group">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
                   <MessageSquare className="w-4 h-4 inline mr-2" />
                   Message
                 </label>

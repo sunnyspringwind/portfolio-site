@@ -33,6 +33,7 @@ const HeroSection: React.FC = () => {
         <ul className="flex space-x-4">
           <li className={reachMeClass}>
             <a
+              title="github"
               href="https://github.com/sunnyspringwind/"
               className="hover:text-green-400 text-xl"
             >
@@ -41,6 +42,8 @@ const HeroSection: React.FC = () => {
           </li>
           <li className={reachMeClass}>
             <a
+                          title="facebook"
+
               href="https://www.facebook.com/wAnnabe.wiZzarD"
               className="hover:text-green-400 text-xl"
             >
@@ -49,6 +52,8 @@ const HeroSection: React.FC = () => {
           </li>
           <li className={reachMeClass}>
             <a
+                          title="gmail"
+
               href="aaseslimbu2@gmail.com/"
               className="hover:text-green-400 text-xl"
             >
