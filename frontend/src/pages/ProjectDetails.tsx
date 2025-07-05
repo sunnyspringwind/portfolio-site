@@ -2,62 +2,14 @@ import { useParams } from 'react-router-dom';
 import type {Project} from '../components/ProjectSection'
 import Header from '../components/Header';
 
-let imgRoute = './../src/assets/img/portfolio/';
-// let imgRoute = '/portfolio-site/src/assets/img/portfolio/';
+import { projectList } from '../components/ProjectSection'
 
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Nepal Knowledge Hub",
-    url: "https://nephub.netlify.app/",
-    demo: "https://youtu.be/zqHUMF9syFA?si=sWT9g7zHQQE74Z0N",
-    desc: "An engaging web encyclopedia and quiz platform for curious Nepali youth, combining history, top figures, horoscope, and interactive content.",
-    image: [`${imgRoute}nephub1.png`, `${imgRoute}nephub2.png`],
-    category: "App"
-  },
-  {
-    id: 2,
-    title: "SmartGov Bot",
-    url: "https://www.gov.il/en",
-    demo: "https://youtu.be/xycd6Kgk27c?si=ECq9LVrmywYCXmSi",
-    desc: "Conversational AI assistant that helps Nepali citizens navigate and fill out government forms with speech and text input support.",
-    image: [`${imgRoute}smartgov_bot.png`],
-    category: "App"
-  },
-  {
-
-    id: 3,
-    title: "MyDoctor App",
-    url: "https://mydoctor.health",
-    demo: "https://mydoctor.health/demo",
-    desc: "A virtual clinic app offering health record tracking, online consultations, and medication reminders, especially for rural Nepali communities.",
-    image: [`${imgRoute}branding-1.jpg`],
-    category: "App"
-  },
-  {
-    id: 4,
-    title: "Joni Mitchell Portrait",
-    url: "https://ashislimbu.art/joni",
-    desc: "A digital art tribute to Joni Mitchell, reflecting themes of nostalgia, resilience, and creativity in a surreal color palette.",
-    image: [`${imgRoute}joni_mitchel.png`],
-    category: "Art"
-  },
-  {
-    id: 5,
-    title: "Through the Mist",
-    url: "https://ashislimbu.art/mist",
-    desc: "An experimental generative artwork exploring themes of memory and obscurity using procedural fog patterns and poetry overlays.",
-    image: [`${imgRoute}hero1.jpg`],
-    category: "Art"
-  },
-];
 
 
 const ProjectPage: React.FC = () => {
   const params = useParams();
   const id = parseInt(params.id || '', 10);
-  const p = projects.find((proj) => proj.id === id);
+  const p = projectList.find((proj: Project) => proj.id === id);
 
   if (!p) return <div className="text-red-400">Project not found</div>;
 

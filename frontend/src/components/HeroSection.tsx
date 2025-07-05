@@ -1,6 +1,8 @@
 import { BsFacebook, BsGithub, BsEnvelope } from "react-icons/bs";
 import { ReactTyped } from "react-typed";
 
+import hero1 from '../assets/images/portfolio/hero1.jpg';
+
 const HeroSection: React.FC = () => {
 
     let reachMeClass =  'p-2 rounded-full bg-black'
@@ -9,7 +11,7 @@ const HeroSection: React.FC = () => {
     <section id="hero" className="relative bg-gray-900 text-white max-h-full overflow-hidden">
       <img
         title="me clicks memories"
-        src="./../src/assets/img/portfolio/hero1.jpg"
+        src={hero1}
         className="w-full object-cover opacity-60"
       />
 

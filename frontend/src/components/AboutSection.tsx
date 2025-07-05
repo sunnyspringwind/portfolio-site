@@ -1,6 +1,16 @@
 import React from "react";
 
 const AboutSection: React.FC = () => {
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement> ) => {
+    let buttonId = e.currentTarget.id;
+    if (buttonId === 'view-projects') {
+      document.getElementById('portfolio')?.scrollIntoView({behavior: "smooth"})
+        }
+    else if (buttonId === 'contact-me') {
+      document.getElementById('contact')?.scrollIntoView({behavior: "smooth"})
+        }
+      }
   return (
     <section id="about" className="bg-black text-white min-h-screen flex items-center justify-center px-4 md:px-8 lg:px-16">
       <div className="max-w-3xl text-center">
@@ -16,12 +26,12 @@ const AboutSection: React.FC = () => {
           I'm fascinated by <span className="text-green-400">automation</span>, <span className="text-green-400">LLMs</span>, and creating assistants that blend technology and usability — always exploring, always learning.
         </p>
         <div className="mt-6 flex justify-center space-x-4">
-          <a href="#portfolio" className="bg-green-600 hover:bg-green-500 text-black px-4 py-2 rounded-xl transition">
+          <button id="view-projects" onClick={handleClick} className="bg-green-600 hover:bg-green-500 text-black px-4 py-2 rounded-xl transition">
             View Projects
-          </a>
-          <a href="#contact" className="border border-green-600 hover:bg-green-600 hover:text-black px-4 py-2 rounded-xl transition">
+          </button>
+          <button id="contact-me" onClick={handleClick} className="border border-green-600 hover:bg-green-600 hover:text-black px-4 py-2 rounded-xl transition">
             Contact Me
-          </a>
+          </button>
         </div>
       </div>
     </section>

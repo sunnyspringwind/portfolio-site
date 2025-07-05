@@ -191,9 +191,8 @@ useEffect(() => {
               </li>
             ) : (
               <li key={item.path}>
-                <a
-                    href={isMainPage ? item.path : `/${item.path}`}
-                  onClick={() => setMobileMenuOpen(false)} // close menu on link click
+                <button
+                  onClick={() => {setMobileMenuOpen(false); handleClick(item.path)}} // close menu on link click
                   className={`block w-full transition-all duration-300 hover:text-green-400 ${
                     activeSection === item.path.replace("#", "")
                       ? "text-green-400 font-semibold shadow-[0_0_8px_rgba(74,222,128,0.8)]"
@@ -201,7 +200,7 @@ useEffect(() => {
                   }`}
                 >
                   {item.name}
-                </a>
+                </button>
               </li>
             )
           )}

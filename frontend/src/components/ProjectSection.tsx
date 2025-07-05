@@ -1,4 +1,12 @@
 import { useState } from "react";
+import { ROUTES } from "../services/Routes";
+
+import nephub1 from '../assets/images/portfolio/nephub1.png';
+import nephub2 from '../assets/images/portfolio/nephub2.png';
+import hero1 from '../assets/images/portfolio/hero1.jpg';
+import joni_mitchel from '../assets/images/portfolio/joni_mitchel.png';
+import smartgov_bot from '../assets/images/portfolio/smartgov_bot.png';
+import docapp from '../assets/images/portfolio/docapp.png';
 
 type Project = {
   id: number;
@@ -10,16 +18,15 @@ type Project = {
   category: "App" | "Product" | "API" | "Art";
 };
 
-let imgRoute = './../src/assets/img/portfolio/';
 
-const projects: Project[] = [
+export const projectList: Project[] = [
   {
     id: 1,
     title: "Nepal Knowledge Hub",
     url: "https://nephub.netlify.app/",
     demo: "https://youtu.be/zqHUMF9syFA?si=sWT9g7zHQQE74Z0N",
     desc: "An engaging web encyclopedia and quiz platform for curious Nepali youth, combining history, top figures, horoscope, and interactive content.",
-    image: [`${imgRoute}nephub1.png`, `${imgRoute}nephub2.png`],
+    image: [nephub1, nephub2],
     category: "App"
   },
   {
@@ -28,7 +35,7 @@ const projects: Project[] = [
     url: "https://www.gov.il/en",
     demo: "https://youtu.be/xycd6Kgk27c?si=ECq9LVrmywYCXmSi",
     desc: "Conversational AI assistant that helps Nepali citizens navigate and fill out government forms with speech and text input support.",
-    image: [`${imgRoute}smartgov_bot.png`],
+    image: [smartgov_bot],
     category: "App"
   },
   {
@@ -37,7 +44,7 @@ const projects: Project[] = [
     url: "https://mydoctor.health",
     demo: "https://mydoctor.health/demo",
     desc: "A virtual clinic app offering health record tracking, online consultations, and medication reminders, especially for rural Nepali communities.",
-    image: [`${imgRoute}branding-1.jpg`],
+    image: [docapp],
     category: "App"
   },
   {
@@ -45,7 +52,7 @@ const projects: Project[] = [
     title: "Joni Mitchell Portrait",
     url: "https://ashislimbu.art/joni",
     desc: "A digital art tribute to Joni Mitchell, reflecting themes of nostalgia, resilience, and creativity in a surreal color palette.",
-    image: [`${imgRoute}joni_mitchel.png`],
+    image: [joni_mitchel],
     category: "Art"
   },
   {
@@ -53,7 +60,7 @@ const projects: Project[] = [
     title: "Through the Mist",
     url: "https://ashislimbu.art/mist",
     desc: "An experimental generative artwork exploring themes of memory and obscurity using procedural fog patterns and poetry overlays.",
-    image: [`${imgRoute}hero1.jpg`],
+    image: [hero1],
     category: "Art"
   },
 ];
@@ -63,8 +70,8 @@ const ProjectsSection = () => {
   const [filter, setFilter] = useState<"All" | Project["category"]>("All");
 
   const filteredProjects = filter === "All"
-    ? projects
-    : projects.filter(project => project.category === filter);
+    ? projectList
+    : projectList.filter(project => project.category === filter);
 
   return (
     <section id="portfolio" className="py-16 pt-18 bg-black text-white">
@@ -97,7 +104,7 @@ const ProjectsSection = () => {
                   <a href={p.image[0]} target="_blank" rel="noopener noreferrer" className="text-green-400 hover:text-green-300">
                     <i className="bi bi-zoom-in"></i> Preview
                   </a>
-                  <a href={`/portfolio-details/${p.id}`} className="text-green-400 hover:text-green-300">
+                  <a href={ROUTES.PROJECT_DETAILS(p.id)} className="text-green-400 hover:text-green-300">
                     <i className="bi bi-link-45deg"></i> Details
                   </a>
 
