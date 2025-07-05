@@ -10,7 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/project-details/:id" element={<ProjectPage />} />
-                    {/* Add a catch-all route for GitHub Pages */}
+                    {/* catch-all route for GitHub Pages */}
           <Route path="*" element={<Navigate to='/' />}/>
         </Routes>
     </>
