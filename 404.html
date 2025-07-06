@@ -4,9 +4,18 @@
     <meta charset="utf-8" />
     <title>Redirecting...</title>
     <script>
-      // Get the full path after the domain
-      const redirectTo = '/portfolio-site' + location.pathname + location.search + location.hash;
-      window.location.replace(redirectTo);
+      (function () {
+        const prefix = "/portfolio-site";
+        const path = location.pathname;
+        const search = location.search || "";
+        const hash = location.hash || "";
+
+        // Avoid redirect loop if already redirected
+        if (!path.startsWith(prefix)) {
+          const target = prefix + path + search + hash;
+          window.location.replace(target);
+        }
+      })();
     </script>
   </head>
   <body>
