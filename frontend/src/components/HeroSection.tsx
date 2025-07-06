@@ -19,10 +19,10 @@ const HeroSection: React.FC = () => {
  <h2 className="text-4xl  md:text-6xl font-bold  sm:mb-4 bg-gradient-to-r from-green-400 via-emerald-300 to-green-500 bg-clip-text text-transparent">
             Ashish Limbu
           </h2>        <p className="text-lg md:text-2xl mb-6">
-          I'm{" "}
+          I'm {" "}
           <span className="text-green-400 font-semibold">
            <ReactTyped
-    strings={["Living Thing", "Developer", "AI Enthusiast", 'Artist']}
+    strings={["Good Looking", "Developer", "AI Enthusiast", 'Artist']}
     typeSpeed={50}
     backSpeed={40}
     loop
