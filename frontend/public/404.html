@@ -1,8 +1,13 @@
-<!-- public/404.html -->
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=/portfolio-site/" />
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Get the full path after the domain
+      const redirectTo = '/portfolio-site' + location.pathname + location.search + location.hash;
+      window.location.replace(redirectTo);
+    </script>
   </head>
   <body>
     <p>Redirecting...</p>
