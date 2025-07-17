@@ -1,9 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 import { Send, User, Mail, MessageSquare, FileText } from "lucide-react";
 import Toast from "./Toast";
-import transporter from "../../netlify/functions/sendEmail"
-
-// const backendApi = import.meta.env.VITE_BACKEND_API || 'http://localhost:3000';
 
 interface FormData {
   name: string;
@@ -104,6 +101,7 @@ const ContactSection: React.FC = () => {
 
     if (validation.isValid) {
       try {
+        // const res = await fetch("http://localhost:3001/api/messages", {
         const res = await fetch("./../../netlify/functions/sendEmail", {
           method: "POST",
           headers: {

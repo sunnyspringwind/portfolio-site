@@ -3,7 +3,7 @@ import type { Handler } from "@netlify/functions";
 import { google } from 'googleapis';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
-export const contactHandler: Handler = async (event) => {
+const contactHandler: Handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -88,3 +88,5 @@ export const contactHandler: Handler = async (event) => {
     };
   }
 };
+
+export default contactHandler
