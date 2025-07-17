@@ -10,7 +10,7 @@ const Toast: React.FC<ToastProps> = ({ show, message, type, onClose }) => {
 
   return (
     <div
-      className={`fixed top-4 right-4 p-4 rounded-lg shadow-lg transition-all duration-500 transform translate-y-0 ${
+      className={`fixed top-4 z-50 right-4 p-4 rounded-lg shadow-lg transition-all duration-500 transform translate-y-0 ${
         type === 'success' ? 'bg-green-500' : 'bg-red-500'
       }`}
     >

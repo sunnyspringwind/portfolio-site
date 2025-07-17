@@ -1,6 +1,9 @@
 import { useState, type ChangeEvent } from "react";
 import { Send, User, Mail, MessageSquare, FileText } from "lucide-react";
 import Toast from "./Toast";
+import transporter from "../../netlify/functions/sendEmail"
+
+// const backendApi = import.meta.env.VITE_BACKEND_API || 'http://localhost:3000';
 
 interface FormData {
   name: string;
@@ -24,8 +27,6 @@ const patterns = {
   message: /^.{10,500}$/,
 };
 
-
-
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -33,9 +34,9 @@ const ContactSection: React.FC = () => {
     subject: "",
     message: "",
   });
-const [showToast, setShowToast] = useState(false);
-const [toastMessage, setToastMessage] = useState('');
-const [toastType, setToastType] = useState<'success' | 'error'>('success');
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<"success" | "error">("success");
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -94,48 +95,42 @@ const [toastType, setToastType] = useState<'success' | 'error'>('success');
     return { isValid: Object.keys(newErrors).length === 0, errors: newErrors };
   };
 
-// Update handleSubmit to show toast
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+  // Update handleSubmit to show toast
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  const validation = validateFormData(formData);
+    const validation = validateFormData(formData);
 
-  if (validation.isValid) {
-    try {
-      const res = await fetch("http://localhost:3000/api/message", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    if (validation.isValid) {
+      try {
+        const res = await fetch("./../../netlify/functions/sendEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || data.message || 'Something went wrong');
-      setToastType('error');
-      setToastMessage(data.message);
-      setShowToast(true);
-      <Toast show={showToast} message={toastMessage} type={toastType} onClose={()=> setShowToast(false)} /> 
-      setTimeout(() => setShowToast(false), 3000);
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : String(err);
-      setToastType('error');
-      setToastMessage(errorMessage);
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
+        const data = await res.json();
+        if (!res.ok)
+          throw new Error(data.error || data.message || "Something went wrong");
+        setToastType("success");
+        setToastMessage("Got your message will reach you soon!");
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        setToastType("error");
+        setToastMessage(errorMessage);
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+      }
+    } else {
+      setErrors(validation.errors);
     }
-  } else {
-    setErrors(validation.errors);
-  }
-  setIsSubmitting(false);
-};
-
-
-
-
-
-
+    setIsSubmitting(false);
+  };
 
   return (
     <section
@@ -333,6 +328,14 @@ const handleSubmit = async (e: React.FormEvent) => {
           </div>
         </div>
       </div>
+      {showToast && (
+        <Toast
+          show={showToast}
+          message={toastMessage}
+          type={toastType}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </section>
   );
 };

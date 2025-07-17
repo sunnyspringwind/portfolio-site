@@ -69,7 +69,7 @@ useEffect(() => {
   return (
     <header
       id="header"
-      className="z-50 fixed top-0 bg-black/80 backdrop-blur-md w-screen h-auto text-white"
+      className="z-40 fixed top-0 bg-black/80 backdrop-blur-md w-screen h-auto text-white"
     >
       <div className="flex justify-between items-center p-5 max-w-7xl mx-auto">
         <h1 className="text-xl font-bold">Personal</h1>
