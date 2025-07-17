@@ -1,37 +1,54 @@
 import nodemailer from "nodemailer";
-import type { Handler } from "@netlify/functions";
 import { google } from 'googleapis';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
-const contactHandler: Handler = async (event) => {
+// Use the newer Context type instead of Handler
+interface NetlifyEvent {
+  httpMethod: string;
+  body: string | null;
+}
+
+const jsonResponse = (
+  body: object | string,
+  status: number
+): Response => {
+  const json =
+    typeof body === "string" ? body : JSON.stringify(body);
+
+  return new Response(json, {
+    status,
+    headers: {
+      "Access-Control-Allow-Origin": "https://ashishlimbu.info.np",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+const handler = async (event: NetlifyEvent): Promise<Response> => {
   if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: "Method Not Allowed",
-    };
+    return jsonResponse("Method Not Allowed", 405);
+  }
+
+  if (!event.body) {
+    return jsonResponse("Missing request body", 400);
   }
 
   try {
-    if (!event.body) {
-      return {
-        statusCode: 400,
-        body: "Missing request body",
-      };
-    }
-
     const { name, email, subject, message } = JSON.parse(event.body);
 
     const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID!,
-    process.env.GOOGLE_CLIENT_SECRET!,
-    'https://developers.google.com/oauthplayground' // or your redirect URI
-  );
+      process.env.GOOGLE_CLIENT_ID!,
+      process.env.GOOGLE_CLIENT_SECRET!,
+      "https://developers.google.com/oauthplayground"
+    );
 
-  oauth2Client.setCredentials({
-    refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-  });
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+    });
 
-  const accessToken = await oauth2Client.getAccessToken();
+    const accessToken = await oauth2Client.getAccessToken();
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -40,7 +57,7 @@ const contactHandler: Handler = async (event) => {
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
-        accessToken: accessToken.token
+        accessToken: accessToken.token,
       },
     } as SMTPTransport.Options);
 
@@ -61,32 +78,12 @@ const contactHandler: Handler = async (event) => {
 
     await transporter.sendMail(mailOptions);
 
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-      body: JSON.stringify({
-        success: true,
-        message: "Email sent successfully!",
-      }),
-    };
+    return jsonResponse({ success: true, message: "Email sent successfully!" }, 200);
   } catch (error) {
     console.error("Error sending email:", error);
-
-    return {
-      statusCode: 500,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-      body: JSON.stringify({
-        success: false,
-        error: "Failed to send email",
-      }),
-    };
+    return jsonResponse({ success: false, error: "Failed to send email" }, 500);
   }
 };
 
-export { contactHandler }
+
+export { handler };
