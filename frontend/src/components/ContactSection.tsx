@@ -102,7 +102,7 @@ const ContactSection: React.FC = () => {
     if (validation.isValid) {
       try {
         // const res = await fetch("http://localhost:3001/api/messages", {
-        const res = await fetch("./../../netlify/functions/sendEmail", {
+        const res = await fetch("https://ashishlimbu.info.np/.netlify/functions/sendEmail", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
