@@ -89,4 +89,4 @@ const contactHandler: Handler = async (event) => {
   }
 };
 
-export default contactHandler
+export { contactHandler }
