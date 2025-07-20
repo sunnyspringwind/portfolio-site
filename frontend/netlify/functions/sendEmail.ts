@@ -1,31 +1,34 @@
 import nodemailer from "nodemailer";
-import { google } from 'googleapis';
-import SMTPTransport from 'nodemailer/lib/smtp-transport';
-
+import { google } from "googleapis";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 // Use the newer Context type instead of Handler
 interface NetlifyEvent {
   httpMethod: string;
   body: string | null;
 }
 
-const jsonResponse = (
-  body: object | string,
-  status: number
-): Response => {
-  const json =
-    typeof body === "string" ? body : JSON.stringify(body);
+type NetlifyResponse = {
+  statusCode: number;
+  body: string;
+  headers?: Record<string, string>;
+};
 
-  return new Response(json, {
-    status,
+const jsonResponse = (body: object | string, statusCode: number) => {
+  const json = typeof body === "string" ? body : JSON.stringify(body);
+
+  return {
+    statusCode,
+    body: json,
     headers: {
-      "Access-Control-Allow-Origin": "https://ashishlimbu.info.np",
+      // "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": process.env.ALLOWED_ORIGIN || "*",
       "Access-Control-Allow-Headers": "Content-Type",
       "Content-Type": "application/json",
     },
-  });
+  };
 };
 
-const handler = async (event: NetlifyEvent): Promise<Response> => {
+const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
   if (event.httpMethod !== "POST") {
     return jsonResponse("Method Not Allowed", 405);
   }
@@ -33,7 +36,6 @@ const handler = async (event: NetlifyEvent): Promise<Response> => {
   if (!event.body) {
     return jsonResponse("Missing request body", 400);
   }
-
   try {
     const { name, email, subject, message } = JSON.parse(event.body);
 
@@ -77,13 +79,15 @@ const handler = async (event: NetlifyEvent): Promise<Response> => {
     };
 
     await transporter.sendMail(mailOptions);
-
-    return jsonResponse({ success: true, message: "Email sent successfully!" }, 200);
+    const jres = jsonResponse(
+      { success: true, message: "Email sent successfully!" },
+      200
+    );
+    return jres;
   } catch (error) {
     console.error("Error sending email:", error);
-    return jsonResponse({ success: false, error: "Failed to send email" }, 500);
+    return jsonResponse({ success: false, error: "Failed to send email" }, 400);
   }
 };
-
 
 export { handler };

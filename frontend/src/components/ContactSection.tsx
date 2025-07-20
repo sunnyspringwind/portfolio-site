@@ -101,7 +101,7 @@ const ContactSection: React.FC = () => {
 
     if (validation.isValid) {
       try {
-        // const res = await fetch("http://localhost:3001/api/messages", {
+        // const res = await fetch("http://localhost:8888/.netlify/functions/sendEmail", {
         const res = await fetch("https://ashishlimbu.info.np/.netlify/functions/sendEmail", {
           method: "POST",
           headers: {
@@ -109,7 +109,6 @@ const ContactSection: React.FC = () => {
           },
           body: JSON.stringify(formData),
         });
-
         const data = await res.json();
         if (!res.ok)
           throw new Error(data.error || data.message || "Something went wrong");
