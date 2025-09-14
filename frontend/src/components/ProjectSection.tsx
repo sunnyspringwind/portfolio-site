@@ -4,7 +4,7 @@ import { ROUTES } from "../services/Routes";
 
 import nephub1 from '../assets/images/portfolio/nephub1.webp';
 import nephub2 from '../assets/images/portfolio/nephub2.webp';
-import hero1 from '../assets/images/portfolio/hero1.jpg';
+import hero1 from '../assets/images/portfolio/hero1.webp';
 import joni_mitchel from '../assets/images/portfolio/joni_mitchel.webp';
 import smartgov_bot from '../assets/images/portfolio/smartgov_bot.png';
 import docapp from '../assets/images/portfolio/docapp.png';

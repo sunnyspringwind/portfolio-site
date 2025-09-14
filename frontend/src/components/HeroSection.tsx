@@ -1,7 +1,7 @@
 import { BsFacebook, BsGithub, BsEnvelope } from "react-icons/bs";
 import { ReactTyped } from "react-typed";
 
-import hero1 from '../assets/images/portfolio/hero1.jpg';
+import hero1 from '../assets/images/portfolio/hero1.webp';
 
 const HeroSection: React.FC = () => {
 
