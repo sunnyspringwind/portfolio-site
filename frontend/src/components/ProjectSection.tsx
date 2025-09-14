@@ -1,10 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState } from "react";
 import { ROUTES } from "../services/Routes";
 
-import nephub1 from '../assets/images/portfolio/nephub1.png';
-import nephub2 from '../assets/images/portfolio/nephub2.png';
+import nephub1 from '../assets/images/portfolio/nephub1.webp';
+import nephub2 from '../assets/images/portfolio/nephub2.webp';
 import hero1 from '../assets/images/portfolio/hero1.jpg';
-import joni_mitchel from '../assets/images/portfolio/joni_mitchel.png';
+import joni_mitchel from '../assets/images/portfolio/joni_mitchel.webp';
 import smartgov_bot from '../assets/images/portfolio/smartgov_bot.png';
 import docapp from '../assets/images/portfolio/docapp.png';
 
@@ -19,7 +20,7 @@ type Project = {
 };
 
 
-export const projectList: Project[] = [
+ export const projectList: Project[] = [
   {
     id: 1,
     title: "Nepal Knowledge Hub",
