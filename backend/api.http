@@ -1,0 +1,17 @@
+
+
+GET http://localhost:3000/api/message
+###
+
+POST http://localhost:3000/api/message
+Content-Type: application/json
+
+{
+  "name": "Ashis Limbu",
+  "email": "ashis@example.com",
+  "subject": "Hello",
+  "message": "This is a test message from .http file."
+}
+###
+
+DELETE http://localhost:3000/api/message/68708a4b1dcdbc953fe085c5

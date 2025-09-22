@@ -5,7 +5,7 @@ import hero1 from '../assets/images/portfolio/hero1.webp';
 
 const HeroSection: React.FC = () => {
 
-    let reachMeClass =  'p-2 rounded-full bg-black'
+    const reachMeClass =  'p-2 rounded-full bg-black'
 
   return (
     <section id="hero" className="relative bg-gray-900 text-white max-h-full overflow-hidden">

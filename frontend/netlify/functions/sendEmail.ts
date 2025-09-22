@@ -49,6 +49,17 @@ const handler = async (event: NetlifyEvent): Promise<NetlifyResponse> => {
       refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
     });
 
+    // Enable automatic token refresh
+    oauth2Client.on('tokens', (tokens) => {
+      if (tokens.refresh_token) {
+        // Store the new refresh token if provided
+        console.log('New refresh token received');
+      }
+      if (tokens.access_token) {
+        console.log('New access token received');
+      }
+    });
+
     const accessToken = await oauth2Client.getAccessToken();
 
     const transporter = nodemailer.createTransport({
